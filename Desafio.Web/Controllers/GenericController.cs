@@ -34,12 +34,12 @@ namespace Desafio.Web.Controllers
         /// Método <c>CustomValidations</c> para realizar validações personalizadas
         /// antes do (CREATE) e (UPDATE)
         /// </summary>
-        abstract protected void CustomValidations(TEntity obj);
+        abstract protected TEntity CustomValidations(TEntity obj, string action);
 
         /// <summary>
         /// Método <c>LoadOptionalData</c> para enviar dados pela ViewData ou ViewBag
         /// </summary>
-        abstract protected void LoadOptionalData(TEntity obj);
+        abstract protected TEntity LoadOptionalData(TEntity obj);
 
         /// <summary>
         /// Método <c>Index</c> gerencia a requisição 'GET' (READ) do Controller.
@@ -79,8 +79,9 @@ namespace Desafio.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(TEntity obj)
         {
-            LoadOptionalData(obj);
-            CustomValidations(obj);
+            obj = LoadOptionalData(obj);
+            ModelState.Clear();
+            obj = CustomValidations(obj, "create");
 
             ValidationResult result = validator.Validate(obj);
 
@@ -89,15 +90,13 @@ namespace Desafio.Web.Controllers
                 result.AddToModelState(this.ModelState);
                 return View(obj);
             }
-
             if (ModelState.IsValid)
             {
                 service.Add<AbstractValidator<TEntity>>(obj);
 
                 TempData["success"] = $"{typeof(TEntity).Name} cadastrado com sucesso.";
                 return RedirectToAction("Index");
-            }
-            else
+            } else
             {
                 return View(obj);
             }
@@ -127,29 +126,6 @@ namespace Desafio.Web.Controllers
         }
 
         /// <summary>
-        /// Método <c>Details</c> gerencia a requisição 'GET' (DETAILS), recebe
-        /// o id da entidade, consulta no banco de dados e retorna a view de 
-        /// detalhes.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>
-        /// Caso encontre, retorna a entidade na view de detalhes, caso contrário,
-        /// retorna NotFound() 404.
-        /// </returns>
-        public IActionResult Details(int id)
-        {
-            var entityFromDb = CheckAndFindEntityById(id);
-            LoadOptionalData(entityFromDb);
-
-            if (entityFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(entityFromDb);
-        }
-
-        /// <summary>
         /// Método <c>Update</c> gerencia a requisição 'POST' (UPDATE), recebe
         /// o obj entidade alterado, valida, persiste e redireciona para o Index
         /// View.
@@ -164,9 +140,10 @@ namespace Desafio.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Update(TEntity obj)
         {
-            LoadOptionalData(obj);
-
-            CustomValidations(obj);
+            obj = LoadOptionalData(obj);
+            
+            ModelState.Clear();
+            obj = CustomValidations(obj, "update");
 
             ValidationResult result = validator.Validate(obj);
 
@@ -176,10 +153,38 @@ namespace Desafio.Web.Controllers
                 return View(obj);
             }
 
-            service.Update<AbstractValidator<TEntity>>(obj);
-            TempData["success"] = $"{typeof(TEntity).Name} atualizado com sucesso!";
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+			{
+                service.Update<AbstractValidator<TEntity>>(obj);
+                TempData["success"] = $"{typeof(TEntity).Name} atualizado com sucesso!";
+                return RedirectToAction("Index");
+            }
+
+            return View(obj);            
         }
+
+        /// <summary>
+        /// Método <c>Details</c> gerencia a requisição 'GET' (DETAILS), recebe
+        /// o id da entidade, consulta no banco de dados e retorna a view de 
+        /// detalhes.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>
+        /// Caso encontre, retorna a entidade na view de detalhes, caso contrário,
+        /// retorna NotFound() 404.
+        /// </returns>
+        public IActionResult Details(int id)
+        {
+            var entityFromDb = CheckAndFindEntityById(id);
+            entityFromDb = LoadOptionalData(entityFromDb);
+
+            if (entityFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(entityFromDb);
+        }   
 
         /// <summary>
         /// Método <c>Delete</c> gerencia a requisição 'GET' (DELETE), recebe
@@ -195,7 +200,7 @@ namespace Desafio.Web.Controllers
         {
 
             var entityFromDb = CheckAndFindEntityById(id);
-            LoadOptionalData(entityFromDb);
+            entityFromDb = LoadOptionalData(entityFromDb);
 
             if (entityFromDb == null)
             {
@@ -221,7 +226,7 @@ namespace Desafio.Web.Controllers
         public IActionResult DeleteById(int id)
         {
             var entityFromDb = CheckAndFindEntityById(id);
-            LoadOptionalData(entityFromDb);
+            entityFromDb = LoadOptionalData(entityFromDb);
 
             if (entityFromDb == null)
             {

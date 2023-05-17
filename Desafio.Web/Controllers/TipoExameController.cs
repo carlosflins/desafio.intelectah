@@ -10,12 +10,14 @@ namespace Desafio.Web.Controllers
         {
         }
 
-        protected override void CustomValidations(TipoExame obj)
+        protected override TipoExame CustomValidations(TipoExame obj, string action)
         {
+            return obj;
         }
 
-        protected override void LoadOptionalData(TipoExame obj)
+        protected override TipoExame LoadOptionalData(TipoExame obj)
         {
+            return obj;
         }
     }
 }

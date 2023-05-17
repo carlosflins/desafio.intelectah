@@ -50,5 +50,15 @@ namespace Desafio.Infrastructure.Repository
 
             return pacientes;
         }
+
+        public Paciente FindByCpf(string cpf)
+        {
+            Paciente paciente= null;
+
+            IList<Paciente> query = this._context.Set<Paciente>().Where(p => p.CPF == cpf).ToList();
+            if (query.Count > 0)
+                paciente = query[0];
+            return paciente;
+        }
     }
 }

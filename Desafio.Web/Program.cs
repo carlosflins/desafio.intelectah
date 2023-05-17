@@ -18,7 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-// Adiciona os repositórios.
+// Adiciona os repositÃ³rios.
 builder.Services.AddScoped<IBaseRepository<TipoExame>, TipoExameRepository>();
 builder.Services.AddScoped<IBaseRepository<Exame>, ExameRepository>();
 builder.Services.AddScoped<IBaseRepository<Paciente>, PacienteRepository>();

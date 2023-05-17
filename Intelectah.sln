@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.Web", "Desafio.Web\Desafio.Web.csproj", "{8AFD47A0-9C74-4182-8673-4195522C91AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.Web", "Desafio.Web\Desafio.Web.csproj", "{8AFD47A0-9C74-4182-8673-4195522C91AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.Infrastructure", "Desafio.Infrastructure\Desafio.Infrastructure.csproj", "{ADB5D782-0F28-4F28-9FF5-987C60A8EE40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.Infrastructure", "Desafio.Infrastructure\Desafio.Infrastructure.csproj", "{ADB5D782-0F28-4F28-9FF5-987C60A8EE40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.Domain", "Desafio.Domain\Desafio.Domain.csproj", "{441C9788-9F49-48F1-87A1-55403741DA0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.Domain", "Desafio.Domain\Desafio.Domain.csproj", "{441C9788-9F49-48F1-87A1-55403741DA0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.Service", "Desafio.Service\Desafio.Service.csproj", "{B924A401-848A-49A2-B386-4CF5E600B360}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Desafio.Service", "Desafio.Service\Desafio.Service.csproj", "{B924A401-848A-49A2-B386-4CF5E600B360}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

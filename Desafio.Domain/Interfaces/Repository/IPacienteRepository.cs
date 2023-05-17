@@ -6,6 +6,7 @@ namespace Desafio.Domain.Interfaces.Repository
     {
         public IList<Paciente> ListByNome(string nome);
         public IList<Paciente> ListByCpf(string cpf);
+        public Paciente FindByCpf(string cpf);
         public IList<Paciente> ListByNomeAndCpf(string nome, string cpf);
     }
 }

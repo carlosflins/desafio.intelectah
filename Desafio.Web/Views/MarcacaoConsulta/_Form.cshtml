@@ -6,11 +6,12 @@
 }
 <form method="post" asp-action="@actionName" class="row">
     <input id="iptPacienteId" type="hidden" name="PacienteId"/>
+    <input id="iptProtocolo" type="hidden" name="Protocolo" />
     
     <div class="col-lg-6 col-md-4 mt-3">
         <label asp-for="Paciente.Nome" class="form-label">Paciente</label>
         <div class="input-group">
-            <input asp-for="Paciente.Id" type="text" readonly disabled="@disabled">
+            <input asp-for="Paciente.Id" type="text" class="form-control col-lg-1" readonly disabled="@disabled">
             <input asp-for="Paciente.Nome" type="text" class="form-control col-lg-3" readonly disabled="@disabled">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSelecaoPaciente" onclick="return false;">...</button>
         </div>

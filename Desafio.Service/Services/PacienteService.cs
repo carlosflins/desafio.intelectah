@@ -1,7 +1,6 @@
 ﻿using Desafio.Domain.Entities;
 using Desafio.Domain.Interfaces.Repository;
 using Desafio.Domain.Interfaces.Service;
-using Desafio.Infrastructure.Repository;
 using FluentValidation;
 
 namespace Desafio.Service.Services
@@ -25,6 +24,11 @@ namespace Desafio.Service.Services
         public IList<Paciente> ListByNomeAndCpf(string nome, string cpf)
         {
             return ((IPacienteRepository)this._repository).ListByNomeAndCpf(nome, cpf);
+        }
+
+        public Paciente FindByCpf(string cpf)
+        {
+            return ((IPacienteRepository)this._repository).FindByCpf(cpf);
         }
     }
 }

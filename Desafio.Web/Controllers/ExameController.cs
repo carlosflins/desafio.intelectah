@@ -13,12 +13,16 @@ namespace Desafio.Web.Controllers
         {
             _tipoExameService = tipoExameService;
         }
-        protected override void CustomValidations(Exame obj)
+        
+        protected override Exame CustomValidations(Exame obj, string action)
         {
+            return obj;
         }
-        protected override void LoadOptionalData(Exame obj)
+
+        protected override Exame LoadOptionalData(Exame obj)
         {
             ViewBag.TiposExame = BaseEntityExtensions.ToSelectListItems<TipoExame>(_tipoExameService.ListAll().ToList());
+            return obj;
         }
     }
 }

@@ -21,7 +21,9 @@ namespace Desafio.Service.Validators
 
             RuleFor(marcacaoConsulta => marcacaoConsulta.DataHoraMarcacao)
                 .NotEmpty()
-                .WithMessage("A Data e Hora é obrigatório.");
+                .WithMessage("A Data e Hora é obrigatório.")
+                .GreaterThanOrEqualTo(DateTime.Now)
+                .WithMessage("Data selecionada é inválida.");
         }
     }
 }
