@@ -5,4 +5,5 @@ Após o git clone:
 - Abre a solução para restaurar os projetos
 - Realiza o Rebuild completo da solução
 - Instalação do SQL Server local
-- rodar no NuGet console o comando: update-database
+- abrir o NuGet console, selecionar o projeto: Desafio.Infrastructure
+- rodar no console o comando: update-database
