@@ -1,0 +1,50 @@
+﻿<div class="modal modal-fullscreen" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Consulta de Pacientes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12">
+                    <h4>Consulta de Pacientes</h4>
+                </div>
+                <div class="col-lg-6">
+                    <label>Nome:</label>
+                    <input id="iptPacienteNome" type="text" class="form-control" />
+                </div>
+                <div class="col-lg-6">
+                    <label>CPF:</label>
+                    <input id="iptPacienteCPF" type="text" class="form-control cpf" />
+                </div>
+
+                <div class="row">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Data de Nascimento</th>
+                                <th>Sexo</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td colspan="7">
+                                    <h4>Nenhum paciente encontrado para os filtros acima.</h4>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

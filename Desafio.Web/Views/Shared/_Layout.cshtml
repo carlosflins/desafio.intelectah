@@ -1,0 +1,49 @@
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Desafio Intelectah! | @ViewData["Title"]</title>
+    <link href="~/lib/bootstrap-5.2.3-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons-1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/css/sidebar.css" rel="stylesheet" />
+</head>
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle"> <i class="bi bi-list" id="header-toggle"></i> </div>
+        <h5>Intelectah - Desafio Asp.NET | EntityFramework | FluidValidation | Bootstrap | SQL Server | Camadas</h5>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a asp-controller="Home" asp-action="Index" class="nav_logo"><i class="bi bi-layers nav_logo-icon"></i><span class="nav_logo-name">Desafio Web</span></a>
+                <div class="nav_list">
+                    <a asp-controller="Home" asp-action="Index" class='nav_link @(controllerName == "Home" ? "active" : "")'><i class="bi bi-house-fill nav_icon"></i><span class="nav_name">Home</span></a>
+                    <a asp-controller="Paciente" asp-action="Index" class='nav_link @(controllerName == "Paciente" ? "active" : "")'><i class="bi bi-people-fill nav_icon"></i><span class="nav_name">Pacientes</span> </a>
+                    <a asp-controller="TipoExame" asp-action="Index" class='nav_link @(controllerName == "TipoExame" ? "active" : "")'><i class="bi bi-collection-fill nav_icon"></i><span class="nav_name">Tipos de Exame</span></a>
+                    <a asp-controller="Exame" asp-action="Index" class='nav_link @(controllerName == "Exame" ? "active" : "")'> <i class="bi bi-clipboard2-pulse-fill nav_icon"></i><span class="nav_name">Exames</span></a>
+                    <a asp-controller="MarcacaoConsulta" asp-action="Index" class='nav_link @(controllerName == "MarcacaoConsulta" ? "active" : "")'> <i class="bi bi-calendar-plus nav_icon"></i><span class="nav_name">Marcação de Consulta</span></a>
+                </div>
+            </div>
+            <a href="https://github.com/carlosflins/desafio.intelectah/" class="nav_link"> <i class="bi bi-git nav_icon"></i><span class="nav_name">github sources</span></a>
+        </nav>
+    </div>
+    
+    <!-- Modals -->
+    @await RenderSectionAsync("Modals", required: false)
+
+    <!--Container Main start-->
+    <div class="row container">
+        
+        @RenderBody()
+    </div>
+    <!--Container Main end-->
+    <script src="~/lib/jquery/jquery-3.7.0.min.js"></script>
+    <script src="~/lib/bootstrap-5.2.3-dist/js/bootstrap.js"></script>
+    <script src="~/js/sidebar.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

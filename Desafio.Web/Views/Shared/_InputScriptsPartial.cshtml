@@ -1,0 +1,9 @@
+﻿<script src="~/lib/jquery-mask/jquery.mask.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.cpf').mask('000.000.000-00', { reverse: true });
+        $('.telefone').mask('(00) 00000-0000');
+        $('.date').mask('00/00/0000', {clearIfNotMatch: true, placeholder:"__/__/____"});
+        $('.datetime').mask('00/00/0000 00:00', { clearIfNotMatch: true, placeholder: "__/__/____ 00:00" });
+    });
+</script>

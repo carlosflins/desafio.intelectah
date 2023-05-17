@@ -1,0 +1,18 @@
+﻿@model Desafio.Domain.Entities.TipoExame
+@{
+    ViewData["Title"] = "Novo Tipo de Exame";
+}
+
+<div class="mt-3">
+    <h4>@ViewData["Title"]</h4>
+</div>
+
+<div class="container-fluid mt-3">
+    <partial name="_Form" />
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_InputScriptsPartial" />
+    }
+}

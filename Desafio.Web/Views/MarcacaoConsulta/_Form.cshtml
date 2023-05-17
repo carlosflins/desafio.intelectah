@@ -1,0 +1,107 @@
+﻿@model Desafio.Domain.Entities.MarcacaoConsulta
+@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var actionName = this.ViewContext.RouteData.Values["action"].ToString();
+    var disabled = actionName == "Details" || actionName == "Delete";
+}
+<form method="post" asp-action="@actionName" class="row">
+    <input id="iptPacienteId" type="hidden" name="PacienteId"/>
+    
+    <div class="col-lg-6 col-md-4 mt-3">
+        <label asp-for="Paciente.Nome" class="form-label">Paciente</label>
+        <div class="input-group">
+            <input asp-for="Paciente.Id" type="text" readonly disabled="@disabled">
+            <input asp-for="Paciente.Nome" type="text" class="form-control col-lg-3" readonly disabled="@disabled">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSelecaoPaciente" onclick="return false;">...</button>
+        </div>
+        <span class="text-danger" asp-validation-for="PacienteId" hidden="@disabled"></span>
+    </div>
+
+    <div class="col-lg-6 col-md-4 mt-3">
+        <label asp-for="TipoExameId" class="form-label">Tipo de Exame</label>
+        <div class="input-group">
+            <select asp-for="TipoExameId" asp-items="@ViewBag.TiposExame" class="form-control form-select tipoexame" disabled="@disabled">
+                <option selected="selected" value="">Selecione</option>
+            </select>
+            <a asp-controller="TipoExame" asp-action="Create" class="btn btn-primary">+</a>
+        </div>
+        <span class="text-danger" asp-validation-for="TipoExameId" hidden="@disabled"></span>
+    </div>
+
+    <div class="col-lg-6 col-md-4 mt-3">
+        <label asp-for="ExameId" class="form-label">Exame</label>
+        <div class="input-group">
+            <select asp-for="ExameId" asp-items="@ViewBag.Exames" class="form-control form-select exame" disabled="@disabled">
+                <option selected="selected" value="">Selecione</option>
+            </select>
+            <a asp-controller="Exame" asp-action="Create" class="btn btn-primary">+</a>
+        </div>
+        <span class="text-danger" asp-validation-for="ExameId" hidden="@disabled"></span>
+    </div>
+
+    <div class="col-lg-6 col-md-4 mt-3">
+        <label asp-for="DataHoraMarcacao" class="form-label">Data e Hora</label>
+        <input asp-for="DataHoraMarcacao" type="datetime-local" class="form-control" disabled="@disabled">
+        <span class="text-danger" asp-validation-for="DataHoraMarcacao" hidden="@disabled"></span>
+    </div>
+
+    <div class="row mt-3">
+        @if(actionName == "Details")
+        {
+            <a asp-controller="@controllerName" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-primary mt-3">Ir para Alterar</a>
+        } else if (actionName == "Delete") 
+        {
+            <button type="submit" class="btn btn-danger mt-3">Confirmar Exclusão</button>
+        } else 
+        {
+            <button type="submit" class="btn btn-primary mt-3">Salvar</button>
+        }
+        <a asp-controller="@controllerName" asp-action="Index" class="btn btn-secondary mt-1">Voltar para lista</a>
+    </div>
+</form>
+<!--
+<div id="modalSelecaoPaciente" aria-labelledby="..." aria-hidden="true" tabindex="-1" class="modal modal-dialog modal-xl">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4>Consulta de Pacientes</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <h4>Consulta de Pacientes</h4>
+            </div>
+            <div class="col-lg-6">            
+                <label>Nome:</label>
+                <input id="iptPacienteNome" type="text" class="form-control"/>
+            </div>
+            <div class="col-lg-6">
+                <label>CPF:</label>
+                <input id="iptPacienteCPF" type="text" class="form-control cpf" />
+            </div>
+
+            <div class="row">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Data de Nascimento</th>
+                            <th>Sexo</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td colspan="7">
+                                <h4>Nenhum paciente encontrado para os filtros acima.</h4>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>-->

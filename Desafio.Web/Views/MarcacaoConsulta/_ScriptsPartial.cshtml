@@ -1,0 +1,65 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $('#iptPacienteId')[0].value = $('#Paciente_Id')[0].value;
+
+        this.selecionarPaciente = function(id, nome, cpf) {
+            $('#Paciente_Nome')[0].value = nome;
+            $('#Paciente_Id')[0].value = id;
+            $('#iptPacienteId')[0].value = id;
+            $('#modalSelecaoPaciente').modal('toggle');
+        }
+
+        var getSelecionarBtnStr = function(id, nome, cpf) {
+            retorno = '<button class="btn btn-primary" onclick="selecionarPaciente(\'' + id + '\',\'' + nome + '\',\'' + cpf + '\');">Selecionar</button>';
+            return retorno;
+        }
+        
+        $('select.tipoexame').on('change', function () {
+            idTipoExame = $('select.tipoexame')
+            $.ajax({
+                type: "GET",
+                url: "/MarcacaoConsulta/getExamesByTipoExameId/",
+                data: {"tipoExameId": this.value},
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('select.exame').html('');
+
+                    $('select.exame').append('<option value="">Selecione</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        $('select.exame').append('<option value="' + data[i].id + '">' + data[i].nome + '</option>');
+                    }
+                }
+            });
+        });
+
+        $('#btnConsultaPaciente').click(function () {
+            nome = $('#iptPacienteNome')[0].value;
+            cpf = $('#iptPacienteCPF')[0].value;
+
+            $.ajax({
+                type: "GET",
+                url: "/MarcacaoConsulta/getPacientesByNomeAndCpf/",
+                data: {"nome": nome, "cpf": cpf},
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $('#tblConsultaPaciente tbody').html('');
+                    if (data.length <= 0)
+                        $('#tblConsultaPaciente tbody').append('<tr><td colspan="7"><h4>Nenhum paciente encontrado para os filtros acima.</h4></td></tr>');
+                            
+                    var q = "\'";
+
+                    for (var i = 0; i < data.length; i++) {
+                        $('#tblConsultaPaciente tbody').append('<tr><td>' + data[i].nome + '</td>' + 
+                            '<td>' + data[i].cpf + ' </td>' +
+                            '<td>' + data[i].dataNascimento + ' </td>' +
+                            '<td>' + data[i].sexo + ' </td>' +
+                            '<td>' + data[i].telefone + ' </td>' +
+                            '<td>' + data[i].email + ' </td>' +
+                            '<td>' + getSelecionarBtnStr(data[i].id, data[i].nome, data[i].cpf) + '</td>' +
+                            '</tr>');
+                    }
+                }
+            });
+        });
+    });
+</script>
